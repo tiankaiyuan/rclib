@@ -1,0 +1,19 @@
+{
+  "presets": [
+    "es2015",
+    "stage-0",
+    "react"
+  ],
+  "env": {
+    "node": {
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [".less", ".css"]
+          }
+        ]
+      ]
+    }
+  }
+}
