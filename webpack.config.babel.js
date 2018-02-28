@@ -3,72 +3,39 @@
  */
 import path  from 'path';
 import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import UglifyJsPlugin    from 'uglifyjs-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
-import extend from './lib/extend';
 let userClientPath = path.resolve('.');
+//webpack 参数 -p 生产打包 -d开发打包
 const isDebug = !process.argv.includes('-p');
 const publicPath = '/';
-//webpack 参数 -p 生产打包 -d开发打包
-let htmlConf = { //根据模板插入css/js等生成最终HTML
-    filename: '', //生成的html存放路径，相对于path
-    template: '', //html模板路径
-    inject: 'body', //js插入的位置，true/'head'/'body'/false
-    hash: true, //为静态资源生成hash值
-    chunks: [],//需要引入的chunk，不配置就会引入所有页面的资源
-    minify: { //压缩HTML文件
-        removeComments: true, //移除HTML中的注释
-        collapseWhitespace: false //删除空白符与换行符
-    }
-};
-let htmlConfs = [];
 
-htmlConfs.push(new HtmlWebpackPlugin(extend({}, htmlConf, {
-    filename: './index.html',
-    template: userClientPath + '/view/index.html', //html模板路径
-    chunks: ['vendor', 'bundle']
-})));
-
-// htmlConfs.push(new HtmlWebpackPlugin(extend({}, htmlConf, {
-//     filename: './manage.html',
-//     template: userClientPath + '/view/manage/manage.html', //html模板路径
-//     chunks: ['manageVendor', 'manage']
-// })));
-
-htmlConfs.push(new HtmlWebpackPlugin(extend({}, htmlConf, {
-    filename: './resMessage.html',
-    template: userClientPath + '/view/resMessage.html', //html模板路径
-})));
 let plugin = isDebug ? [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             'process.env.BROWSER': true, 'process.env': {
                 NODE_ENV: JSON.stringify('development')
             }
-        }), //全局变量
-        ...htmlConfs,//页面
-        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
+        })
     ] : [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             'process.env.BROWSER': true, 'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
-        }), //全局变量
-        ...htmlConfs,//页面
-        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
+        }),
         /**
          * 压缩混淆
          */
         new UglifyJsPlugin({
             // // 删除所有的注释
             extractComments: true,
-            uglifyOptions:{
+            uglifyOptions: {
                 ecma: 8
             }
         }),
+        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
         /**
          * 提取css
          */
@@ -87,10 +54,9 @@ const wpClientConfig = {
      *
      */
     entry: {
-        bundle: ['babel-polyfill', userClientPath + '/view/index.js'],
-        // manage: ['babel-polyfill', userClientPath + '/view/manage/manage.js']
-        assets: [userClientPath + '/view/assets/index.js'],
-        vendor: ['react','react-dom','react-router','react-router-dom','react-redux','redux']
+        bundle: ['babel-polyfill', userClientPath + '/client/index.js'],
+        assets: [userClientPath + '/shared/assets/index.js'],
+        vendor: ['react', 'react-dom', 'react-router', 'react-router-dom', 'react-redux', 'redux']
     },
     /**
      * webpack dev server 启动配置
@@ -106,7 +72,7 @@ const wpClientConfig = {
         //浏览器访问页面的路径
         //连接静态资源的路径要是一个绝对路径
         publicPath: isDebug ? '/' : publicPath,
-        path: userClientPath + '/dist'
+        path: userClientPath + '/server/dist'
     },
     watchOptions: {
         aggregateTimeout: 300,
