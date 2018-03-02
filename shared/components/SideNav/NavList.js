@@ -14,7 +14,9 @@ const NavList = ({navList, subNavList, showSub, onClick}) => {
                 <i className={"icon-angle-right " + (showSub.includes(index) ? 'icon-rotate' : '')}/>
             </NavLink>
             {
-                showSub.includes(index) && <SubNav subNavList={subNavList}/>
+                showSub.includes(index) && <SubNav
+                    navLink={value.link}
+                    subNavList={subNavList}/>
             }
         </li>)
 

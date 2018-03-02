@@ -4,12 +4,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {NavLink} from 'react-router-dom'
-const SubNav = ({subNavList}) => {
+const SubNav = ({subNavList, navLink}) => {
     return (<ul className="subNavList">
         {
             subNavList.map((value, index) => {
-                return (<li key={index} >
-                    <NavLink to={value.link}
+                return (<li key={index}>
+                    <NavLink to={navLink + value.link}
                              activeClassName={'subNavSelected'}>
                         {value.text}
                     </NavLink>
@@ -19,6 +19,7 @@ const SubNav = ({subNavList}) => {
     </ul>)
 };
 SubNav.propTypes = {
-    subNavList: PropTypes.array.isRequired
+    subNavList: PropTypes.array.isRequired,
+    navLink: PropTypes.string.isRequired
 };
 export default SubNav
