@@ -1,6 +1,6 @@
+@import "../../assets/common";
 ul.sideNav {
   font-size: 1.8rem;
-  color: #1e1e1e;
   border-right: 1px solid #d2d2d2;
   & > li {
     margin-top: 2.5rem;
@@ -8,9 +8,9 @@ ul.sideNav {
       display: inline-block;
       height: 2.5rem;
       width: 100%;
-      color: #989898;
+      color: @color;
       & > i.icon-angle-right {
-        color: #5e8ce0;
+        color: @themeColor;
         float: right;
         transition: transform 0.2s linear;
       }
@@ -22,7 +22,7 @@ ul.sideNav {
       box-sizing: border-box;
     }
     a:hover {
-      background: #5e8ce0;
+      background: @themeColor;
       color: #ffffff;
       & > i.icon-angle-right {
         color: #ffffff;

@@ -9,17 +9,21 @@ class SideNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showSub: 0
+            showSub: []
         };
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(index) {
-        if(index === this.state.showSub){
-            index = -1;
+        let i = this.state.showSub.indexOf(index),
+            arr = [...this.state.showSub];
+        if (i >= 0) {
+            arr.splice(i,1)
+        } else {
+            arr.push(index)
         }
-        return ()=>
-        this.setState({showSub: index})
+        return () =>
+            this.setState({showSub: [...arr]})
     }
 
     render() {

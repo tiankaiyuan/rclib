@@ -1,14 +1,13 @@
+@import "../assets/common";
 html {
   font-size: 10px; //rem基础值需要适配的地方使用，需要固定的地方不能使用
 }
-
-@blank: 8rem;
 @navWidth: 20rem;
 .root-component {
   font-size: 1.4rem;
   & > header {
     height: 5rem;
-    background: #5e8ce0;
+    background: @themeColor;
     padding-left: @blank;
     padding-right: @blank;
   }

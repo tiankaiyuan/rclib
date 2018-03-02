@@ -11,10 +11,10 @@ const NavList = ({navList, subNavList, showSub, onClick}) => {
             <NavLink to={value.link}
                      onClick={onClick(index)}>
                 {value.text}
-                <i className={"icon-angle-right " + (showSub==index ? 'icon-rotate' : '')}/>
+                <i className={"icon-angle-right " + (showSub.includes(index) ? 'icon-rotate' : '')}/>
             </NavLink>
             {
-                (showSub==index) && <SubNav subNavList={subNavList}/>
+                showSub.includes(index) && <SubNav subNavList={subNavList}/>
             }
         </li>)
 
@@ -23,6 +23,6 @@ const NavList = ({navList, subNavList, showSub, onClick}) => {
 NavList.propTypes = {
     navList: PropTypes.array.isRequired,
     onClick: PropTypes.func.isRequired,
-    showSub: PropTypes.number.isRequired
+    showSub: PropTypes.array.isRequired
 };
 export default NavList
