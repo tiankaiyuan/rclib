@@ -9,10 +9,11 @@ import {withRouter} from 'react-router'
 import  './root.less';
 import '../assets/font/css/fontello.css'
 import SideNav from '../components/SideNav'
+import Header  from '../components/Header'
 const Root = (props) => {
     return (<div className="root-component">
         <header>
-
+            <Header/>
         </header>
         <nav>
             <SideNav navList={props.navList} subNavList={props.subNavList}/>
@@ -23,7 +24,7 @@ const Root = (props) => {
         <footer></footer>
     </div>)
 };
-const RootMSPT = (state)=>{
+const RootMSPT = (state) => {
     return {
         navList: state.nav.navList,
         subNavList: state.nav.subNavList
