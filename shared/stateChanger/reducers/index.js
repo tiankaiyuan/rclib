@@ -3,6 +3,8 @@
  */
 import {combineReducers} from 'redux'
 import button      from './button'
+import nav     from './nav'
 export default combineReducers({
-    button
+    button,
+    nav
 });

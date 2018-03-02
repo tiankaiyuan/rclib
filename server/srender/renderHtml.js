@@ -47,10 +47,6 @@ export  default (componentHtml = '', metaData = {}, initState) => {
         a {
             text-decoration: none
         }
-    
-        a:active, a:link, a:visited {
-            color: #fdfdfd
-        }
     </style>
     <link rel="icon" href="/static/favicon[base64:8].ico" type="image/x-icon"/>
     <link href="/bundle.css" rel="stylesheet">

@@ -1,4 +1,32 @@
+html {
+  font-size: 10px; //rem基础值需要适配的地方使用，需要固定的地方不能使用
+}
+
+@blank: 8rem;
+@navWidth: 20rem;
 .root-component {
-  font-size: 14px;
-  color: #fff000
+  font-size: 1.4rem;
+  & > header {
+    height: 5rem;
+    background: #5e8ce0;
+    padding-left: @blank;
+    padding-right: @blank;
+  }
+  & > nav {
+    position: absolute;
+    top: 5rem;
+    left: @blank;
+    width: @navWidth;
+    margin-top: 2rem;
+  }
+  & > main {
+    margin-top: 2rem;
+    margin-right: @blank;
+    margin-left: @blank + @navWidth;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  & > footer {
+
+  }
 }

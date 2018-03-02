@@ -1,0 +1,33 @@
+ul.sideNav {
+  font-size: 1.8rem;
+  color: #1e1e1e;
+  border-right: 1px solid #d2d2d2;
+  & > li {
+    margin-top: 2.5rem;
+    a {
+      display: inline-block;
+      height: 2.5rem;
+      width: 100%;
+      color: #989898;
+      & > i.icon-angle-right {
+        color: #5e8ce0;
+        float: right;
+        transition: transform 0.2s linear;
+      }
+      & > i.icon-rotate {
+        transform: rotate(90deg);
+      }
+      line-height: 2.5rem;
+      padding-left: 0.3rem;
+      box-sizing: border-box;
+    }
+    a:hover {
+      background: #5e8ce0;
+      color: #ffffff;
+      & > i.icon-angle-right {
+        color: #ffffff;
+      }
+    }
+    @import "./subNav";
+  }
+}
