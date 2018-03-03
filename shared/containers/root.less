@@ -2,18 +2,18 @@
 html {
   font-size: 10px; //rem基础值需要适配的地方使用，需要固定的地方不能使用
 }
-@navWidth: 20rem;
 .root-component {
   font-size: 1.4rem;
   & > header {
-    height: 5rem;
+    height: @headerHeight;
     background: @themeColor;
     padding-left: @blank;
     padding-right: @blank;
+    @import "../components/Header/index";
   }
   & > nav {
     position: absolute;
-    top: 5rem;
+    top: @headerHeight;
     left: @blank;
     width: @navWidth;
     margin-top: 2rem;

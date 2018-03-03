@@ -1,0 +1,21 @@
+@import "../../assets/common";
+
+nav.topNav {
+  height: 100%;
+  display: inline-block;
+  margin-left: 10.5rem;
+  & > a {
+    display: inline-block;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: 100%;
+    font-size: 1.6rem;
+    line-height: @headerHeight;
+    color: #ffffff;
+    box-sizing: border-box;
+  }
+  & > a.selected {
+    border-bottom: 0.2rem solid #0558f1;
+    color: #0558f1;
+  }
+}
