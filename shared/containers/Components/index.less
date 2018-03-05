@@ -1,0 +1,16 @@
+& > nav.com-nav {
+  position: absolute;
+  top: @headerHeight;
+  left: @blank;
+  width: @navWidth;
+  margin-top: 2rem;
+  @import '../../components/SideNav/index';
+}
+& > main.com-main {
+  margin-top: 2rem;
+  margin-right: @blank;
+  margin-left: @blank + @navWidth;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  @import '../../components/ContainerCom/index';
+}

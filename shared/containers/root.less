@@ -3,6 +3,7 @@ html {
   font-size: 10px; //rem基础值需要适配的地方使用，需要固定的地方不能使用
 }
 .root-component {
+  @import "./Components/index";
   font-size: 1.4rem;
   & > header {
     height: @headerHeight;
@@ -10,20 +11,6 @@ html {
     padding-left: @blank;
     padding-right: @blank;
     @import "../components/Header/index";
-  }
-  & > nav {
-    position: absolute;
-    top: @headerHeight;
-    left: @blank;
-    width: @navWidth;
-    margin-top: 2rem;
-  }
-  & > main {
-    margin-top: 2rem;
-    margin-right: @blank;
-    margin-left: @blank + @navWidth;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
   }
   & > footer {
 

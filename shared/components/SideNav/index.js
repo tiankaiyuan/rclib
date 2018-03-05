@@ -4,7 +4,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import NavList from './NavList'
-import './index.less'
 class SideNav extends Component {
     constructor(props) {
         super(props);
@@ -14,13 +13,13 @@ class SideNav extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(index) {
-        let i = this.state.showSub.indexOf(index),
+    handleClick(value) {
+        let i = this.state.showSub.indexOf(value),
             arr = [...this.state.showSub];
         if (i >= 0) {
             arr.splice(i,1)
         } else {
-            arr.push(index)
+            arr.push(value)
         }
         return () =>
             this.setState({showSub: [...arr]})
@@ -29,7 +28,6 @@ class SideNav extends Component {
     render() {
         return (<ul className="sideNav">
             <NavList navList={this.props.navList}
-                     subNavList={this.props.subNavList}
                      showSub={this.state.showSub}
                      onClick={this.handleClick}/>
         </ul>)
