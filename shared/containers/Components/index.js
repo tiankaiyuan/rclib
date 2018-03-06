@@ -8,6 +8,7 @@ import {withRouter} from 'react-router'
 import SideNav from '../../components/SideNav'
 import Header  from '../../components/Header'
 import ContainerCom from '../../components/ContainerCom'
+import Title from '../../components/Title'
 const Com = props => {
     const SN = () => <SideNav navList={props.navList}/>;
     let arr = [];
@@ -16,19 +17,27 @@ const Com = props => {
             let value = props.navList[key];
             arr.push(<Route path={value.link}
                             key={key}
-                            component={() => <ContainerCom
+                            component={() => <Title
                                 title={value.title || ''}
                                 description={value.description || ''}>
-                            </ContainerCom>}>
+                            </Title>}>
 
             </Route>);
             if (value.subNavList) {
                 let subNav = value.subNavList;
                 for (let k in subNav) {
                     if (subNav.hasOwnProperty(k)) {
-                        arr.push(<Route path={value.link+k}
-                                        key={k}
-                                        component={subNav[k].Component}/>);
+                        arr.push(
+                            <Route path={value.link + k}
+                                   key={k}
+                                   component={() => {
+                                       const subNavCom = subNav[k];
+                                       return (<ContainerCom>
+                                           {/*react组件最终取得只是函数或类的内存地址，可以使用jsx理解的变量承载*/}
+                                           <subNavCom.Component/>
+                                       </ContainerCom>)
+                                   }}/>
+                        );
                     }
                 }
             }

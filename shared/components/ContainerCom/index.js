@@ -1,16 +1,44 @@
 /**
  * Created by tiankaiyuan on 2018/3/3.
  */
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-const ContainerCom = ({title = '', description = ''}) => {
-    return (<div className="ContainerCom">
-        <h1>{title}</h1>
-        <p className="ContainerComDesc">{description}</p>
-    </div>)
-};
+import Slider    from '../Slider';
+class ContainerCom extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            width: props.width || 100
+        };
+        this.changeWidth = this.changeWidth.bind(this);
+        this.saveWidth = this.saveWidth.bind(this);
+    }
+
+    changeWidth(value) {
+        this.setState({width: (this.props.width || 100) - value})
+    }
+    saveWidth(){
+        console.log('save width',this.state.width)
+    }
+    render() {
+        const width = this.state.width;
+        return (<div className="ContainerCom">
+            <Slider changeWidth={this.changeWidth}
+                    savePercent={this.saveWidth}
+                    percent={width}/>
+            <div className="container" style={
+                {
+                    width: width + '%'
+                }
+            }>
+                {this.props.children}
+            </div>
+        </div>)
+    }
+}
+
 ContainerCom.propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    // title: PropTypes.string.isRequired,
+    // description: PropTypes.string.isRequired
 };
 export default ContainerCom;

@@ -49,7 +49,7 @@ export  default (componentHtml = '', metaData = {}, initState) => {
         }
     </style>
     <link rel="icon" href="/static/favicon[base64:8].ico" type="image/x-icon"/>
-    <link href="/bundle.css" rel="stylesheet">
+    <link href="/bundle.css" type="text/css" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
 </head>
 <body>
