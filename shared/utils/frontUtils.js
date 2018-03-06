@@ -252,12 +252,10 @@ export const drag = (distance = 0, callback) => {
                 } else if (move < 0) {
                     move = 0;
                 }
-
                 // if (Math.abs(move) >= moveDistance && offset <= 0 || (left >= 0 && offset > 0)) {
                 //     return;
                 // }
                 target.style.left = move + 'px';
-
                 callback && callback(move / moveDistance * 100);
             },
             onMouseUp = () => {

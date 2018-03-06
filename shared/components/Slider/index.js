@@ -10,11 +10,13 @@ class Slider extends Component {
         this.sliderDom = undefined;
         this.cursor = undefined;
         this.drag = undefined;
-
+        this.sliderWidth = undefined;
     }
 
     componentDidMount() {
-        this.drag = drag(this.sliderDom.offsetWidth, this.dragCursor);
+        this.sliderWidth = this.sliderDom.offsetWidth;
+        this.cursor.style.left = this.props.percent / 100 * (this.sliderWidth - this.cursor.offsetWidth) + 'px';
+        this.drag = drag(this.sliderWidth, this.dragCursor);
         if (isPc()) {
             this.cursor.addEventListener('mousedown', this.drag, false);
         } else {
@@ -39,7 +41,8 @@ class Slider extends Component {
                      id="sliderInput"
                      ref={node => this.sliderDom = node}>
             <button onClick={this.props.savePercent}>OK</button>
-            <span className="cursor" ref={node => this.cursor = node}><i>{this.props.percent}</i></span>
+            <span className="cursor"
+                  ref={node => this.cursor = node}><i>{this.props.percent}</i></span>
             <label htmlFor="">调整大小</label>
         </div>);
     }

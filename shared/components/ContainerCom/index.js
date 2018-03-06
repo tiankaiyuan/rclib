@@ -15,7 +15,7 @@ class ContainerCom extends Component {
     }
 
     changeWidth(value) {
-        this.setState({width: (this.props.width || 100) - value})
+        this.setState({width: 100 - value})
     }
     saveWidth(){
         console.log('save width',this.state.width)
@@ -38,7 +38,6 @@ class ContainerCom extends Component {
 }
 
 ContainerCom.propTypes = {
-    // title: PropTypes.string.isRequired,
-    // description: PropTypes.string.isRequired
+  width: PropTypes.number.isRequired
 };
 export default ContainerCom;

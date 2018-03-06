@@ -32,7 +32,7 @@ const Com = props => {
                                    key={k}
                                    component={() => {
                                        const subNavCom = subNav[k];
-                                       return (<ContainerCom>
+                                       return (<ContainerCom width={50}>
                                            {/*react组件最终取得只是函数或类的内存地址，可以使用jsx理解的变量承载*/}
                                            <subNavCom.Component/>
                                        </ContainerCom>)
