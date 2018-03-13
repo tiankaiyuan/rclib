@@ -15,7 +15,7 @@ module.exports = {
             instance: 1,
             exec_mode: 'cluster',
             watch: ['./','../logger'], //默认监视执行目录(./)，指定路径不能使用yml文件类型
-            ignore_watch: ['log']
+            ignore_watch: ['log','dist']
         },
         {
             script: './apiServer/index.js',

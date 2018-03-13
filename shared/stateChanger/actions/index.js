@@ -14,7 +14,7 @@ export const saveComponentSize = (value, id) => (dispatch) => {
             }
         },
         callback: response => {
-            // dispatch(popMsg(response.msg))
+            dispatch(popMsg(response.msg))
         }
     })
 };
