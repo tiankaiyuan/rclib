@@ -11,12 +11,16 @@ import  './root.less';
 import '../assets/font/css/fontello.css'
 import Header  from '../components/Header'
 import Com     from './Components'
+import PopMsgContainer from './PopMsgContainer'
 const Root = (props) => {
     return (<div className="root-component">
         <header>
             <Header/>
+            <PopMsgContainer/>
         </header>
         <Route path={'/components'} component={Com}/>
+        <Route path={'/combination'} component={()=>(<div>hello combination</div>)}/>
+        <Route path={'/uploadComponents'} component={()=>(<div>hello upload Components</div>)}/>
         <footer></footer>
     </div>)
 };

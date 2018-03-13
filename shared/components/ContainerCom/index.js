@@ -19,7 +19,7 @@ class ContainerCom extends Component {
     }
 
     saveWidth() {
-        console.log('save width', this.state.width)
+        this.props.saveComponentSize(this.state.width, this.props.componentId);
     }
 
     render() {
@@ -40,6 +40,9 @@ class ContainerCom extends Component {
 }
 
 ContainerCom.propTypes = {
-    width: PropTypes.number.isRequired
+    width: PropTypes.number.isRequired,
+    componentId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    author: PropTypes.string.isRequired,
+    saveComponentSize: PropTypes.func.isRequired
 };
 export default ContainerCom;

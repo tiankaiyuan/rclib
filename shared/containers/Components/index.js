@@ -9,6 +9,7 @@ import SideNav from '../../components/SideNav'
 import Header  from '../../components/Header'
 import ContainerCom from '../../components/ContainerCom'
 import Title from '../../components/Title'
+import {saveComponentSize}   from '../../stateChanger/actions'
 const Com = props => {
     const SN = () => <SideNav navList={props.navList}/>;
     let arr = [];
@@ -32,7 +33,11 @@ const Com = props => {
                                    key={k}
                                    component={() => {
                                        const subNavCom = subNav[k];
-                                       return (<ContainerCom width={50}>
+                                       return (<ContainerCom
+                                           width={64}
+                                           componentId={k}
+                                           author={''}
+                                           saveComponentSize={props.saveComponentSize}>
                                            {/*react组件最终取得只是函数或类的内存地址，可以使用jsx理解的变量承载*/}
                                            <subNavCom.Component/>
                                        </ContainerCom>)
@@ -60,10 +65,16 @@ const Com = props => {
         </main>
     ]
 };
-const ComMSPT = (state) => {
+const ComMSTP = (state) => {
     return {
         navList: state.nav
     }
 };
-export default withRouter(connect(ComMSPT)(Com))
+const ComMDTP = (dispatch) => {
+    return {
+        saveComponentSize: (value,id) => dispatch(saveComponentSize(value,id))
+
+    }
+};
+export default withRouter(connect(ComMSTP, ComMDTP)(Com))
 

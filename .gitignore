@@ -91,9 +91,6 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-
-output
-kConfig/config.js
 *.orig
 *.tar.gz
 __publish__
@@ -102,6 +99,7 @@ npm-debug.log
 pages/public
 .DS_STORE
 dist
-log/logMsg
-spiders/cacheId
-spiders/sfCache
+dataBase
+apiServer/log
+server/log
+
