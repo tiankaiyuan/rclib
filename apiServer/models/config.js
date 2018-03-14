@@ -12,7 +12,7 @@ let dbOption = {
         dbOption,
     },
     config = {
-        db: '',
+        db: 'mongodb://localhost/rclib',
         dbOption,
     };
 if (process.env.NODE_ENV !== 'production') {
