@@ -2,7 +2,23 @@
  * Created by tiankaiyuan on 2018/2/27.
  */
 import serialize from 'serialize-javascript';
-export  default (componentHtml = '', metaData = {}, initState) => {
+
+const getCdn = (target) => {
+    let cdn = {
+        react: "https://cdn.bootcss.com/react/16.2.0/umd/react.production.min.js",
+        reactDom: "https://cdn.bootcss.com/react-dom/16.2.0/umd/react-dom.production.min.js",
+        redux: "https://cdn.bootcss.com/redux/3.7.1/redux.min.js",
+        reactRouter: "https://cdn.bootcss.com/react-router/4.2.0/react-router.min.js",
+        reactRouterDom: "https://cdn.bootcss.com/react-router-dom/4.2.2/react-router-dom.min.js",
+        babelPolyfill: "https://cdn.bootcss.com/babel-polyfill/6.26.0/polyfill.min.js",
+        axios: "https://cdn.bootcss.com/axios/0.18.0/axios.min.js"
+    };
+    if (process.env.NODE_ENV === 'production') {
+        return cdn[target]
+    }
+    return '';
+};
+export default (componentHtml = '', metaData = {}, initState) => {
     let title = metaData.title;
     return `<!DOCTYPE html>
 <html lang="en">
@@ -57,8 +73,8 @@ export  default (componentHtml = '', metaData = {}, initState) => {
 <script type="text/javascript">
     window.__INITIAL_STATE__ = ${serialize(initState, {isJSON: true})}
 </script>
-<script type="text/javascript" src="/vendor.js"></script>
-<script type="text/javascript" src="/bundle.js"></script>
+<script type="text/javascript"  src="/vendor.js"></script>
+<script type="text/javascript"  src="/bundle.js"></script>
 </body>
 </html>`;
 };

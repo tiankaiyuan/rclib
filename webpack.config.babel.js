@@ -1,52 +1,54 @@
 /**
  * Created by v_kaiytian on 2017/3/23.
  */
-import path  from 'path';
+import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import UglifyJsPlugin    from 'uglifyjs-webpack-plugin'
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
+
 let userClientPath = path.resolve('.');
 //webpack 参数 -p 生产打包 -d开发打包
 const isDebug = !process.argv.includes('-p');
 const publicPath = '/';
 
 let plugin = isDebug ? [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.BROWSER': true, 'process.env': {
-                NODE_ENV: JSON.stringify('development')
-            }
-        })
-    ] : [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.BROWSER': true, 'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        /**
-         * 压缩混淆
-         */
-        new UglifyJsPlugin({
-            // // 删除所有的注释
-            extractComments: true,
-            uglifyOptions: {
-                ecma: 8
-            }
-        }),
-        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
-        /**
-         * 提取css
-         */
-        new ExtractTextPlugin('[name].css'),
-        /**
-         * 进一步使用gzip压缩
-         */
-        new CompressionPlugin({
-            deleteOriginalAssets: true
-        })
-    ]
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+        'process.env.BROWSER': true, 'process.env': {
+            NODE_ENV: JSON.stringify('development')
+        }
+    })
+] : [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+        'process.env.BROWSER': true, 'process.env': {
+            NODE_ENV: JSON.stringify('production')
+        }
+    }),
+    /**
+     * 压缩混淆
+     */
+    new UglifyJsPlugin({
+        // // 删除所有的注释
+        extractComments: true,
+        sourceMap: true,
+        uglifyOptions: {
+            ecma: 8
+        }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
+    /**
+     * 提取css
+     */
+    new ExtractTextPlugin('[name].css'),
+    /**
+     * 进一步使用gzip压缩
+     */
+    new CompressionPlugin({
+        deleteOriginalAssets: true
+    })
+]
 const wpClientConfig = {
     /**
      *entry 值为对象每个key代表一个页，key对应的值代表这个页的主js；值为数组代表将数组中的所有路径指向的js打包成一个js文件；值为字符串就是单一入口文件
@@ -54,19 +56,31 @@ const wpClientConfig = {
      *
      */
     entry: {
-        bundle: ['babel-polyfill', userClientPath + '/client/index.js'],
+        bundle: ['babel-polyfill',userClientPath + '/client/index.js'],
+        vendor: ['react','react-dom','redux','axios','react-router','react-router-dom'],
         assets: [userClientPath + '/shared/assets/index.js'],
-        vendor: ['react', 'react-dom', 'react-router', 'react-router-dom', 'react-redux', 'redux']
     },
-    /**
-     * webpack dev server 启动配置
-     */
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        port: 8080,
-    },
+    //TODO: 开发完成考虑解决使用外部引入依赖库的问题
+    // externals:{
+    //     react: {
+    //         root: 'React',
+    //         commonjs2: 'react',
+    //         commonjs: 'react',
+    //         amd: 'react',
+    //         umd: 'react',
+    //     },
+    //     'react-dom': {
+    //         root: 'ReactDOM',
+    //         commonjs2: 'react-dom',
+    //         commonjs: 'react-dom',
+    //         amd: 'react-dom',
+    //         umd: 'react-dom',
+    //     },        'react-router': isDebug?'':'react-router',
+    //     'react-router-dom': isDebug?'':'react-router-dom',
+    //     'babel-polyfill': isDebug?'':'babel-polyfill',
+    //     redux: isDebug?'':'redux',
+    //     axios: isDebug?'':'axios',
+    // },
     output: {
         filename: '[name].js',
         //浏览器访问页面的路径
@@ -79,6 +93,7 @@ const wpClientConfig = {
         poll: 1000,
         ignored: /node_modules/
     },
+    devtool: isDebug ? 'inline-source-map' : '',
     module: {
         rules: [
             {
@@ -140,15 +155,15 @@ const wpClientConfig = {
             {
                 test: /\.less$/,
                 use: isDebug ? [
-                        {loader: 'style-loader'},
-                        {loader: 'css-loader'},
-                        {loader: 'postcss-loader'},
-                        {loader: 'less-loader'},
-                    ] : ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        //resolve-url-loader may be chained before sass-loader if necessary
-                        use: ['css-loader', 'postcss-loader', 'less-loader']
-                    })
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader'},
+                    {loader: 'postcss-loader'},
+                    {loader: 'less-loader'},
+                ] : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: ['css-loader', 'postcss-loader', 'less-loader']
+                })
             }
 
         ]
