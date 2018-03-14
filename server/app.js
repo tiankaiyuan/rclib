@@ -10,7 +10,6 @@ import sRender from './srender'
 const logger = Logger('appServer');
 const App = new Koa();
 const listenCallback = (protocol, port) => () => {
-    console.log('listen on ' + port + ' protocol: ' + protocol, App.env)
     logger.info('listen on ' + port + ' protocol: ' + protocol, App.env);
 };
 Http.createServer(App.callback())

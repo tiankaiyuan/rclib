@@ -12,6 +12,8 @@ import '../assets/font/css/fontello.css'
 import Header  from '../components/Header'
 import Com     from './Components'
 import PopMsgContainer from './PopMsgContainer'
+import UpComp    from './UploadComponents'
+import Compose   from './Compose'
 const Root = (props) => {
     return (<div className="root-component">
         <header>
@@ -19,9 +21,8 @@ const Root = (props) => {
             <PopMsgContainer/>
         </header>
         <Route path={'/components'} component={Com}/>
-        <Route path={'/combination'} component={()=>(<div>hello combination</div>)}/>
-        <Route path={'/uploadComponents'} component={()=>(<div>hello upload Components</div>)}/>
-        <footer></footer>
+        <Route path={'/combination'} component={Compose}/>
+        <Route path={'/uploadComponents'} component={UpComp}/>
     </div>)
 };
 export default withRouter(connect()(Root));

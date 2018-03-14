@@ -54,7 +54,7 @@ const Com = props => {
             <SideNav navList={props.navList}/>
         </nav>,
         <main className="com-main" key="com-main">
-            <link href="/test.css" type="text/css" rel="stylesheet" async="async"/>
+            {/*<link href="/test.css" type="text/css" rel="stylesheet" async="async"/>*/}
             {
                 arr
             }
