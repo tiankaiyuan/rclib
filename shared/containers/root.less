@@ -1,0 +1,17 @@
+@import "../assets/common";
+html {
+  //字体是以当前值计算，但是宽高是以最小值12px计算的
+  font-size: 10px; //rem基础值需要适配的地方使用，需要固定的地方不能使用
+}
+.root-component {
+  font-size: 1.4rem;
+  & > header {
+    height: @headerHeight;
+    background: @themeColor;
+    padding-left: @blank;
+    padding-right: @blank;
+  }
+  & > footer {
+
+  }
+}

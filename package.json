@@ -1,0 +1,63 @@
+{
+  "name": "react-components-lib",
+  "version": "0.0.1",
+  "description": "react components lib",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -p",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "nodejs",
+    "ssr"
+  ],
+  "author": "kyt",
+  "license": "mit",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-import-inspector": "^2.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-require-ignore": "^0.1.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "compression-webpack-plugin": "^1.1.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^2.30.1",
+    "import-inspector": "^2.0.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-loadable": "^5.3.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "uglifyjs-webpack-plugin": "^1.2.2",
+    "webpack": "^3.11.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.1",
+    "html-loader": "^0.5.5",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.9",
+    "precss": "^1.4.0",
+    "prop-types": "^15.5.10",
+    "style-loader": "^0.18.1",
+    "url-loader": "^0.5.8",
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-server": "^3.0.0"
+  }
+}

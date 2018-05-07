@@ -93,6 +93,7 @@ crashlytics.properties
 crashlytics-build.properties
 *.orig
 *.tar.gz
+*.zip
 __publish__
 node_modules
 npm-debug.log
