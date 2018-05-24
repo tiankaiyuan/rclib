@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 if (process.env.BROWSER) {
-    port = location.port < 90 ? location.port : 8989;
     hostname = location.hostname;
     protocol = location.protocol;
 }

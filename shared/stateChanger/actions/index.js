@@ -2,32 +2,16 @@
  * Created by tiankaiyuan on 2018/2/27.
  */
 import * as ActionTypes from './actionTypes'
-
-export const popMsg = (msg, needConfirm = false, showTime = 3000) => {
+export const reqError=(msg)=> {
     return {
-        type: ActionTypes.POP_MSG,
-        msg,
-        showTime,
-        needConfirm
+        type: ActionTypes.REQ_ERROR,
+        msg
     }
 };
-export const popHidden = (id) => (dispatch, getState) => {
-    const {popMsgs} = getState();
-    dispatch({
-        type: ActionTypes.POP_HIDDEN,
-        id
-    });
-    if (popMsgs.data.length > 0) {
-        dispatch({
-            type: ActionTypes.POP_MSG_CACHED,
-            id
-        })
-    }
-};
-export const popConfirm = (id) => {
-    return {
-        type: ActionTypes.POP_CONFIRM,
-        id
-    }
-};
+export const reqStart = {
+    type: ActionTypes.REQ_START
+}
+export const reqEnd = {
+    type: ActionTypes.REQ_END
+}
 /*INSERT_ACTION*/

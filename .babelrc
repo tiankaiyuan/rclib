@@ -3,23 +3,5 @@
     "es2015",
     "stage-0",
     "react"
-  ],
-  "env": {
-    "node": {
-      "plugins": [
-        //         以下插件需要注意格式问题
-        [
-          "babel-plugin-transform-require-ignore",
-          {
-            "extensions": [
-              ".less",
-              ".css"
-            ]
-          }
-        ],
-        "dynamic-import-node"
-      ]
-
-    }
-  }
+  ]
 }

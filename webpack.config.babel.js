@@ -41,7 +41,6 @@ let plugin = isDebug ? [
         }
     })
 ] : [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
         'process.env.BROWSER': true,
         'process.env': {
@@ -60,7 +59,6 @@ let plugin = isDebug ? [
             ecma: 8
         }
     }),
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
     /**
      * 提取css
      */
@@ -73,6 +71,7 @@ let plugin = isDebug ? [
     })
 ]
 const wpClientConfig = {
+    mode: isDebug ? 'development' : 'production',
     /**
      *entry 值为对象每个key代表一个页，key对应的值代表这个页的主js；值为数组代表将数组中的所有路径指向的js打包成一个js文件；值为字符串就是单一入口文件
      *babel-polyfill babel补丁 用于开启全部es6特性，必须在entry最开始出引入
@@ -100,6 +99,19 @@ const wpClientConfig = {
         publicPath: isDebug ? '/' : publicPath,
         path: userClientPath + '/dist'
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    chunks: "initial",
+                    test: "vendor",
+                    name: "vendor",
+                    enforce: true
+                }
+            }
+        }
+    },
+
     watchOptions: {
         aggregateTimeout: 300,
         poll: 1000,
