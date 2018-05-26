@@ -1,0 +1,32 @@
+
+.popMsg {
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  top: 5%;
+  right: -310px;
+  //transform: translateX(-50%);
+  background: rgba(244, 245, 245, 0.94);
+  transition: right 0.3s linear,top 0.5s linear;
+  -webkit-transition: right 0.3s linear,top 0.5s linear;
+  color: #ff4852;
+  width: 300px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 7px 7px 14px rgba(38, 65, 76, 0.56);
+  font-size: 14px;
+  &.msgShow {
+    right: 15px;
+  }
+  & > p {
+    flex: auto;
+    flex-grow: 4;
+  }
+  & > button {
+    flex: auto;
+    border-left: 1px solid #e0dbdb;;
+    flex-grow: 1;
+  }
+}

@@ -4,15 +4,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
-import {Route} from 'react-router-dom'
+import {Route,Redirect,Switch} from 'react-router-dom'
+import PopMsg from './PopMsgContainer'
 import Test from '../components/Test'
-import {} from '../stateChanger/actions'
 import './root.less'
 
 const Root = (props) => {
     const {} = props;
     return (<div className="root-component">
-        <Test text={' hell'}/>
+        <PopMsg/>
+        <Test/>
     </div>)
 };
 const MSTPRoot = (state) => {

@@ -101,6 +101,9 @@ pages/public
 .DS_STORE
 dist
 dataBase
+log
+logs
+pm2logs
 apiServer/log
 server/log
 

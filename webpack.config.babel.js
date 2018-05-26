@@ -6,48 +6,12 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import extend  from  './shared/utils/extend'
+
 let userClientPath = path.resolve('.');
-//webpack 参数 -p 生产打包 -d开发打包
 const isDebug = !process.argv.includes('-p');
 const publicPath = '/';
-let htmlConf = { //根据模板插入css/js等生成最终HTML
-    filename: '', //生成的html存放路径，相对于path
-    template: '', //html模板路径
-    inject: 'body', //js插入的位置，true/'head'/'body'/false
-    hash: true, //为静态资源生成hash值
-    chunks: [],//需要引入的chunk，不配置就会引入所有页面的资源
-    minify: { //压缩HTML文件
-        removeComments: true, //移除HTML中的注释
-        collapseWhitespace: false //删除空白符与换行符
-    }
-};
-let htmlConfs = [];
 
-htmlConfs.push(new HtmlWebpackPlugin(extend({}, htmlConf, {
-    filename: './index.html',
-    template: userClientPath + '/client/index.html', //html模板路径
-    chunks: ['vendor', 'bundle']
-})));
-
-let plugin = isDebug ? [
-    new webpack.HotModuleReplacementPlugin(),
-    ...htmlConfs,//页面
-    new webpack.DefinePlugin({
-        'process.env.BROWSER': true,
-        'process.env': {
-            NODE_ENV: JSON.stringify('development')
-        }
-    })
-] : [
-    new webpack.DefinePlugin({
-        'process.env.BROWSER': true,
-        'process.env': {
-            NODE_ENV: JSON.stringify('production')
-        }
-    }),
-    ...htmlConfs,//页面
+let plugin = isDebug ? [] : [
     /**
      * 压缩混淆
      */
@@ -70,6 +34,13 @@ let plugin = isDebug ? [
         deleteOriginalAssets: true
     })
 ]
+plugin.push(new webpack.DefinePlugin({
+    'process.env.BROWSER': true,
+    'process.env': {
+        NODE_ENV: JSON.stringify(isDebug ? 'development' : 'production')
+    }
+}));
+plugin.push(new webpack.HotModuleReplacementPlugin());
 const wpClientConfig = {
     mode: isDebug ? 'development' : 'production',
     /**
@@ -78,44 +49,37 @@ const wpClientConfig = {
      *
      */
     entry: {
-        bundle: ['babel-polyfill',userClientPath + '/client/index.js'],
-        vendor: ['react','react-dom','redux','axios','react-router','react-router-dom'],
+        bundle: [userClientPath + '/client/index.js'],
         assets: [userClientPath + '/shared/assets/index.js'],
-    },
-    /**
-     * webpack dev server 启动配置
-     */
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        port: 8080,
-    },
-    output: {
-        filename: '[name].js',
-        //浏览器访问页面的路径
-        //连接静态资源的路径要是一个绝对路径
-        chunkFilename:'[name].js',
-        publicPath: isDebug ? '/' : publicPath,
-        path: userClientPath + '/dist'
     },
     optimization: {
         splitChunks: {
             cacheGroups: {
-                vendor: {
+                bundle: {
                     chunks: "initial",
-                    test: "vendor",
-                    name: "vendor",
+                    test: "bundle",
+                    name: "bundle",
                     enforce: true
                 }
             }
         }
     },
-
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000,
-        ignored: /node_modules/
+    // 以下写法表示，webpack以key过滤目标，然后以value在全局中检索目标。（react-dom以script 引入的全局变量为ReactDOM）
+    externals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        'react-router': 'ReactRouter',
+        'react-router-dom': 'ReactRouterDOM',
+        axios: 'axios',
+        redux: 'Redux'
+    },
+    output: {
+        filename: '[name].js',
+        //浏览器访问页面的路径
+        //连接静态资源的路径要是一个绝对路径
+        chunkFilename: '[name].js',
+        publicPath: isDebug ? '/' : publicPath,
+        path: userClientPath + '/server/dist'
     },
     devtool: isDebug ? 'inline-source-map' : '',
     module: {
@@ -196,6 +160,8 @@ const wpClientConfig = {
         colors: true,
         timings: true,
     },
+    //慎重使用，为true时编译出错（js文件找不到）时会退出webpack
+    // bail: true,
     plugins: [...plugin]
 };
 export default wpClientConfig;

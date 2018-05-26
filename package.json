@@ -1,21 +1,8 @@
 {
-  "name": "react-components-lib",
+  "name": "newProject",
   "version": "0.0.1",
-  "description": "react components lib",
+  "description": "newProject",
   "main": "index.js",
-  "scripts": {
-    "build": "webpack -p",
-    "start": "webpack-dev-server",
-    "test": "jest"
-  },
-  "keywords": [
-    "react",
-    "components",
-    "nodejs",
-    "ssr"
-  ],
-  "author": "kyt",
-  "license": "mit",
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -25,6 +12,24 @@
       "<rootDir>/node_modules/"
     ]
   },
+  "scripts": {
+    "start": "pm2 start appServer.config.js && pm2 logs",
+    "stop": "pm2 delete all",
+    "logs": "pm2 logs",
+    "build": "webpack -p",
+    "pubPage": "./tool/publishPageServer.sh",
+    "chart": "webpack --profile --json > stats.json",
+    "test": "jest",
+    "pro": "pm2 start appServer.config.js --env production"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "nodejs",
+    "ssr"
+  ],
+  "author": "kyt",
+  "license": "mit",
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
@@ -39,39 +44,46 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "import-inspector": "^2.0.0",
+    "kcors": "^2.2.1",
+    "koa": "^2.5.1",
+    "koa-body": "^2.5.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.3",
+    "log4js": "^2.6.1",
+    "normalizr": "^3.2.4",
+    "pm2": "^2.10.4",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-loadable": "^5.4.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-loader": "^7.1.4",
+    "react-test-renderer": "^16.3.2",
     "compression-webpack-plugin": "^1.1.11",
     "css-loader": "^0.28.11",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^0.11.1",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "jest": "^22.4.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "react-test-renderer": "^16.3.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.4",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "postcss-import": "^10.0.0",
+    "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.5",
-    "precss": "^1.4.0",
+    "precss": "^3.1.2",
     "prop-types": "^15.6.1",
     "redux-logger": "^3.0.6",
-    "style-loader": "^0.18.1",
+    "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
-    "url-loader": "^0.5.8",
+    "url-loader": "^1.0.1",
     "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.4",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-cli": "^2.1.3"
   }
 }
