@@ -16,7 +16,6 @@ if (process.env.BROWSER) {
 let url = protocol + '//' + hostname + ':' + port + '/api/';
 
 let apis = {
-    git: 'https://api.github.com/search/repositories'
    /*INSERT_API*/
 };
 export default apis
