@@ -7,13 +7,13 @@ if [ ! $HOST ]; then
 echo 'Host is empty'
 exit 0
 else
-    echo host is $HOST
+    echo Host is $HOST
 fi
 if [ ! $USER ]; then
 echo 'User is empty'
 exit 0
 else
-    echo host is $HOST
+    echo User is $USER
 fi
 if [ ! $ProjectDir ]; then
 echo 'project path is empty'

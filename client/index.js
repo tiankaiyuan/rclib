@@ -8,6 +8,7 @@ import  {BrowserRouter} from 'react-router-dom'
 import createStore from '../shared/store'
 import Root      from '../shared/containers/Root'
 const preStore =  window.__INITIAL_STATE__ || {};
+delete window.__INITIAL_STATE__;
 const store = createStore(preStore);
 hydrate(
     <Provider store={store}>
